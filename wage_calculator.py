@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from  dateutil.relativedelta import *
 import datetime
 import calendar
@@ -32,27 +34,15 @@ last_day3 = last_day_month(ipdae + relativedelta(months=+14))
 
 first_day4 = last_day3 + relativedelta(days=+1)
 
-first_and_last = (ipdae, last_day1, first_day2, last_day2, first_day3, last_day3, first_day4, junyuk)
+first_and_last = [ipdae, last_day1, first_day2, last_day2, first_day3, last_day3, first_day4, junyuk]
 
-days = []
-for i in range(8):
-    days.append(0)
+days = [0 for i in range(8)]
 
-#days1: Total service days as a private(이병)
-days[0] = first_and_last[1] - first_and_last[0]
-
-#days2: Total service days as a private first class(일병)
-days[1] = first_and_last[3] - first_and_last[2]
-
-#days3: Total service days as a specialist(상병)
-days[2] = first_and_last[5] - first_and_last[4]
-
-#days1: Total service days as a corporal(병장)
-days[3] = first_and_last[7] - first_and_last[6]
+for v0 in range(2, 10, 2):
+    days[int(v0/2)-1] = first_and_last[v0-1] - first_and_last[v0-2]
 
 for i in range(8) :
-    print(first_and_last[i])
-    
+    print(first_and_last[i])    
     if (i%2 == 1) :
         print(days[i//2],"\n")
         
@@ -64,10 +54,7 @@ wage.append([510100, 552100, 610200, 676100]) # wage[3]: 2022
             
 print(wage)
         
-months = []
-for i in range(19):
-    each_month = ipdae + relativedelta(months=i)
-    months.append(str(each_month)[:-3])
+months = [str(ipdae + relativedelta(month=i))[:-3] for v0 in range(19)]
 
 print(months)
 
