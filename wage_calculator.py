@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+<<<<<<< HEAD
 '''
 Input: 
 'ipdae'(the date of recruitment)
@@ -22,6 +23,8 @@ Function:
 'rankis(value_in_month_list)'
 'month2wage_list(month_list)'
 '''
+=======
+>>>>>>> 3ccfd61043bea16f0fc0f049b25395dc438610a5
 
 from  dateutil.relativedelta import *
 import datetime
@@ -65,6 +68,7 @@ last_day3 = last_day_month(ipdae + relativedelta(months=+14))
 first_day4 = last_day3 + relativedelta(days=+1)
 
 first_and_last = [ipdae, last_day1, first_day2, last_day2, first_day3, last_day3, first_day4, junyuk]
+<<<<<<< HEAD
 
 # days[i] : Total service days as a private(이병, i=0), priavte first class(일병, i=1), specialist(상병, i=2), and coporal(병장, i=4).
 days = [0 for i in range(8)]
@@ -74,6 +78,16 @@ for v0 in range(0, 8, 2) :
 
 for i in range(8) :
     print(first_and_last[i])
+=======
+
+days = [0 for i in range(8)]
+
+for v0 in range(2, 10, 2):
+    days[int(v0/2)-1] = first_and_last[v0-1] - first_and_last[v0-2]
+
+for i in range(8) :
+    print(first_and_last[i])    
+>>>>>>> 3ccfd61043bea16f0fc0f049b25395dc438610a5
     if (i%2 == 1) :
         print(days[i//2],"\n")
 
@@ -89,6 +103,11 @@ wage.append([459100, 496900, 549200, 608500]) # wage[2]: 2021
 wage.append([510100, 552100, 610200, 676100]) # wage[3]: 2022
             
 print(wage)
+<<<<<<< HEAD
+=======
+        
+months = [str(ipdae + relativedelta(month=i))[:-3] for v0 in range(19)]
+>>>>>>> 3ccfd61043bea16f0fc0f049b25395dc438610a5
 
 #months[i]: Each element is a i-th month during the service in the for mat of 'YYYY-MM'.
 months = [str(ipdae + relativedelta(months=i))[:-3] for i in range(19)]
@@ -137,5 +156,9 @@ def rankis(value_in_month_list) :
 monthly_wage = []
 month2wage_list(months)
     
+<<<<<<< HEAD
 print(monthly_wage)
 print("The sum is ", sum(monthly_wage))
+=======
+print (monthly_wage)
+>>>>>>> 3ccfd61043bea16f0fc0f049b25395dc438610a5
