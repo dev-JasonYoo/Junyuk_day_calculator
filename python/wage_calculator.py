@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 '''
 Input: 
 'ipdae'(the date of recruitment)
@@ -27,12 +27,66 @@ from  dateutil.relativedelta import *
 import datetime
 import calendar
 
-ipdae = datetime.date.fromisoformat(input("입대일을 YYYY-MM-DD 형식으로 입력해주세요\n"))
-junyuk = ipdae+relativedelta(years=+1,months=+6,days=-1)
-total_days = str(junyuk - ipdae).split(',')[0]
+def main():
+    global ipdae, junyuk, total_days, first_and_last, wage, months, monthly_wage
+    ipdae = datetime.date.fromisoformat(input("입대일을 YYYY-MM-DD 형식으로 입력해주세요\n"))
+    junyuk = ipdae+relativedelta(years=+1,months=+6,days=-1)
+    total_days = str(junyuk - ipdae).split(',')[0]
 
-print("전역일은 {}입니다.".format(junyuk))
-print("총 복무일은 {}일입니다\n".format(total_days[:-5]))
+    print("전역일은 {}입니다.".format(junyuk))
+    print("총 복무일은 {}일입니다\n".format(total_days[:-5]))
+
+
+
+    #first_and_last: the list contains significant dates(ipdae day, first and last days of each rank, and junyuk day)
+    #should be edited to consider promotion failed
+    last_day1 = last_day_month(ipdae + relativedelta(months=+2))
+
+    first_day2 = last_day1 + relativedelta(days=+1)
+    last_day2 = last_day_month(ipdae + relativedelta(months=+8))
+
+    first_day3 = last_day2 + relativedelta(days=+1)
+    last_day3 = last_day_month(ipdae + relativedelta(months=+14))
+
+    first_day4 = last_day3 + relativedelta(days=+1)
+
+    first_and_last = [ipdae, last_day1, first_day2, last_day2, first_day3, last_day3, first_day4, junyuk]
+
+    # days[i] : Total service days as a private(이병, i=0), priavte first class(일병, i=1), specialist(상병, i=2), and coporal(병장, i=4).
+    days = [0 for i in range(8)]
+
+    for v0 in range(0, 8, 2) :
+        days[v0//2] = first_and_last[v0+1] - first_and_last[v0]
+
+    for i in range(8) :
+        print(first_and_last[i])
+
+    #wage[year][rank]: wage of each rank during each year
+    #year: a number of year after 2019
+    #ex) 2021 --> i=2
+    #rank: monthly wage of each rank
+    #rank=0 --> priavate(이병), j=1 --> priavte first class(일병), j=2 --> specialist(상병), j=3 --> corporal(병장)
+    wage=[]
+    wage.append([306100, 331300, 366200, 405700]) # wage[0]: 2019
+    wage.append([408100, 441700, 488200, 540900]) # wage[1]: 2020
+    wage.append([459100, 496900, 549200, 608500]) # wage[2]: 2021
+    wage.append([510100, 552100, 610200, 676100]) # wage[3]: 2022
+
+    print(wage)
+
+    months = [str(ipdae + relativedelta(month=i))[:-3] for v0 in range(19)]
+
+    #months[i]: Each element is a i-th month during the service in the for mat of 'YYYY-MM'.
+    months = [str(ipdae + relativedelta(months=i))[:-3] for i in range(19)]
+
+    print(months)
+    monthly_wage = []
+    month2wage_list(months)
+    
+    print(monthly_wage)
+    print("The sum is ", sum(monthly_wage))
+    print (monthly_wage)
+
 
 
 
@@ -49,63 +103,6 @@ def first_day_month(a_day) :
 def last_day_month(a_day) :
     a_day = a_day.replace(day=calendar.monthrange(a_day.year,a_day.month)[1])
     return a_day
-
-
-
-#first_and_last: the list contains significant dates(ipdae day, first and last days of each rank, and junyuk day)
-#should be edited to consider promotion failed
-last_day1 = last_day_month(ipdae + relativedelta(months=+2))
-
-first_day2 = last_day1 + relativedelta(days=+1)
-last_day2 = last_day_month(ipdae + relativedelta(months=+8))
-
-first_day3 = last_day2 + relativedelta(days=+1)
-last_day3 = last_day_month(ipdae + relativedelta(months=+14))
-
-first_day4 = last_day3 + relativedelta(days=+1)
-
-first_and_last = [ipdae, last_day1, first_day2, last_day2, first_day3, last_day3, first_day4, junyuk]
-
-# days[i] : Total service days as a private(이병, i=0), priavte first class(일병, i=1), specialist(상병, i=2), and coporal(병장, i=4).
-days = [0 for i in range(8)]
-
-for v0 in range(0, 8, 2) :
-    days[v0//2] = first_and_last[v0+1] - first_and_last[v0]
-
-for i in range(8) :
-    print(first_and_last[i])
-
-days = [0 for i in range(8)]
-
-for v0 in range(2, 10, 2):
-    days[int(v0/2)-1] = first_and_last[v0-1] - first_and_last[v0-2]
-
-for i in range(8) :
-    print(first_and_last[i])
-    if (i%2 == 1) :
-        print(days[i//2],"\n")
-
-#wage[year][rank]: wage of each rank during each year
-#year: a number of year after 2019
-#ex) 2021 --> i=2
-#rank: monthly wage of each rank
-#rank=0 --> priavate(이병), j=1 --> priavte first class(일병), j=2 --> specialist(상병), j=3 --> corporal(병장)
-wage=[]
-wage.append([306100, 331300, 366200, 405700]) # wage[0]: 2019
-wage.append([408100, 441700, 488200, 540900]) # wage[1]: 2020
-wage.append([459100, 496900, 549200, 608500]) # wage[2]: 2021
-wage.append([510100, 552100, 610200, 676100]) # wage[3]: 2022
-            
-print(wage)
-
-months = [str(ipdae + relativedelta(month=i))[:-3] for v0 in range(19)]
-
-#months[i]: Each element is a i-th month during the service in the for mat of 'YYYY-MM'.
-months = [str(ipdae + relativedelta(months=i))[:-3] for i in range(19)]
-    
-print(months)
-
-
 
 #month2wage_list(month_list): gets a list of the month during service and appends a wage of each input month to 'monthly_wage'
 def month2wage_list(month_list) :
@@ -141,12 +138,3 @@ def rankis(value_in_month_list) :
         return 2
     if 15<=index<=18 :
         return 3
-
-
-
-monthly_wage = []
-month2wage_list(months)
-    
-print(monthly_wage)
-print("The sum is ", sum(monthly_wage))
-print (monthly_wage)
