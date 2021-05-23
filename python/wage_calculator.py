@@ -27,9 +27,10 @@ from  dateutil.relativedelta import *
 import datetime
 import calendar
 
-def main():
+def main(response):
     global ipdae, junyuk, total_days, first_and_last, wage, months, monthly_wage
-    ipdae = datetime.date.fromisoformat(input("입대일을 YYYY-MM-DD 형식으로 입력해주세요\n"))
+#   ipdae = datetime.date.fromisoformat(input("입대일을 YYYY-MM-DD 형식으로 입력해주세요\n"))
+    ipdae = datetime.date.fromisoformat(response)
     junyuk = ipdae+relativedelta(years=+1,months=+6,days=-1)
     total_days = str(junyuk - ipdae).split(',')[0]
 

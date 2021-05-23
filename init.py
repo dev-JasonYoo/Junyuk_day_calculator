@@ -11,8 +11,8 @@ app = Flask(__name__)
 def hello():
 	query = request.args.to_dict()
 	if bool(query) == True:
-		ipdae = query['ipdae']
-		main()
+		response = query['ipdae']
+		main(response)
 		return None
 	return render_template('index.html')
 
