@@ -13,10 +13,9 @@ def hello():
 	if bool(query) == True:
 		response = query['ipdae']
 		main(response)
-		return None
+		return str(main(response))
 	return render_template('index.html')
 
-
 if __name__ == '__main__':
-	app.run(host='0.0.0.0',port='5000',debug=True)
+	app.run(host='0.0.0.0', port='5000', debug=True)
 
