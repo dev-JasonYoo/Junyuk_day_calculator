@@ -72,6 +72,9 @@ def main(response):
     wage.append([408100, 441700, 488200, 540900]) # wage[1]: 2020
     wage.append([459100, 496900, 549200, 608500]) # wage[2]: 2021
     wage.append([510100, 552100, 610200, 676100]) # wage[3]: 2022
+    wage.append([544600, 593000, 655700, 726100]) # wage[4]: 2023 estimated
+    wage.append([631100, 687200, 759800, 841400]) # wage[5]: 2024 estimated
+    wage.append([722300, 786500, 869600, 963000]) # wage[6]: 2025 estimated
 
     print(wage)
 
