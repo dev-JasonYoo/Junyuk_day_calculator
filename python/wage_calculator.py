@@ -91,25 +91,10 @@ def main(response):
     print("The sum is ", sum(monthly_wage))
     print (monthly_wage)
 
-    return '''
-전역일은 {}입니다.<br>
-총 복무일은 {}입니다.<br><br>
-
-{}<br>
-{}<br>
-{}<br>
-{}<br>
-{}<br>
-{}<br>
-{}<br>
-{}<br><br>
-
-{}<br>
-{}<br><br>
-
-The sum is {}.<br>
-{}
-'''.format(junyuk, total_days[:-5], first_and_last[0], first_and_last[1], first_and_last[2], first_and_last[3], first_and_last[4], first_and_last[5], first_and_last[6], first_and_last[7], wage, months, sum(monthly_wage), monthly_wage)
+    f = open("/ROKArmy-wage-check/ROKArmy-wage-check/templates/result.html", 'r')
+    result = f.read()
+    
+    return result.format(junyuk, total_days[:-5], first_and_last[0], first_and_last[1], first_and_last[2], first_and_last[3], first_and_last[4], first_and_last[5], first_and_last[6], first_and_last[7], wage, months, sum(monthly_wage), monthly_wage)
 
 
 
