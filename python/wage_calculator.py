@@ -97,6 +97,8 @@ def main(response):
     return result.format(junyuk, total_days[:-5], first_and_last[0], first_and_last[1], first_and_last[2], first_and_last[3], first_and_last[4], first_and_last[5], first_and_last[6], first_and_last[7], wage, months, sum(monthly_wage), monthly_wage)
 
 
+#---------------------------Below are component functions for 'main()' function.---------------------------
+
 
 #A function that changes 'timedelta' object in the format of '%d days, 0:00:00 into int type which only contains the number of days.
 def timedel2int(timedelta) :
