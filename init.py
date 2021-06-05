@@ -12,8 +12,10 @@ def hello():
 	query = request.args.to_dict()
 	if bool(query) == True:
 		response = query['ipdae']
-		main(response)
-		return str(main(response))
+		jn23 = query['jinnu23']
+		jn34 = query['jinnu34']
+		main(response,jn23,jn34)
+		return str(main(response,jn23,jn34))
 	return render_template('index.html')
 
 if __name__ == '__main__':

@@ -27,16 +27,21 @@ from  dateutil.relativedelta import *
 import datetime
 import calendar
 
-def main(response):
-    global ipdae, junyuk, total_days, first_and_last, wage, months, monthly_wage
+def main(response,jn23,jn34):
+    global ipdae, junyuk, total_days, first_and_last, wage, months, monthly_wage, jinnu23, jinnu34, prmt12, prmt23, prmt34
 #   ipdae = datetime.date.fromisoformat(input("입대일을 YYYY-MM-DD 형식으로 입력해주세요\n"))
     ipdae = datetime.date.fromisoformat(response)
     junyuk = ipdae+relativedelta(years=+1,months=+6,days=-1)
     total_days = str(junyuk - ipdae).split(',')[0]
+    jinnu23 = int(float(jn23))
+    jinnu34 = int(float(jn34))
+    
+    prmt12 = 3
+    prmt23 = prmt12 + 6 + jinnu23    #or = 9 + jinnu23
+    prmt34 = prmt23 + 6 + jinnu34    #or = 15 + jinnu23 + jinnu34 
 
     print("전역일은 {}입니다.".format(junyuk))
     print("총 복무일은 {}일입니다\n".format(total_days[:-5]))
-
 
 
     #first_and_last: the list contains significant dates(ipdae day, first and last days of each rank, and junyuk day)
@@ -44,10 +49,10 @@ def main(response):
     last_day1 = last_day_month(ipdae + relativedelta(months=+2))
 
     first_day2 = last_day1 + relativedelta(days=+1)
-    last_day2 = last_day_month(ipdae + relativedelta(months=+8))
+    last_day2 = last_day_month(ipdae + relativedelta(months=+8+jinnu23))
 
     first_day3 = last_day2 + relativedelta(days=+1)
-    last_day3 = last_day_month(ipdae + relativedelta(months=+14))
+    last_day3 = last_day_month(ipdae + relativedelta(months=+14+jinnu23+jinnu34))
 
     first_day4 = last_day3 + relativedelta(days=+1)
 
@@ -97,6 +102,7 @@ def main(response):
     return result.format(junyuk, total_days[:-5], first_and_last[0], first_and_last[1], first_and_last[2], first_and_last[3], first_and_last[4], first_and_last[5], first_and_last[6], first_and_last[7], wage, months, sum(monthly_wage), monthly_wage)
 
 
+
 #---------------------------Below are component functions for 'main()' function.---------------------------
 
 
@@ -140,11 +146,11 @@ def month2wage(value_in_month_list) :
 def rankis(value_in_month_list) :
     index = months.index(value_in_month_list)
     
-    if 0<=index<=2 :
+    if 0<=index<prmt12 :
         return 0
-    if 3<=index<=8 :
+    if prmt12<=index<prmt23 :
         return 1
-    if 9<=index<=14 :
+    if prmt23<=index<prmt34 :
         return 2
-    if 15<=index<=18 :
+    if prmt34<=index<=18 :
         return 3
