@@ -32,68 +32,63 @@
             header, nav, main, aside, footer {
                 border-style: solid;
                 border-width: 1px;
-                width: 100%;
+            }
+            nav, main, aside {
                 height: 100%;
             }
             footer {
                 color: darkgray;
+            }
+            p {
                 text-align: center;
-                font-size: 100%
             }
             .flex_container {
+                display: flex;
+                flex-direction: column;
                 height: 100%;
-                display: grid;
-                grid-template-rows: 10vh auto 10vh;
-                grid-template-columns: minmax(0, 1fr) minmax(0, 3fr) minmax(0, 1fr); <!--Use minmax(0, 1fr) instead of 1fr(google: css grid shrink)-->
+                align-content: stretch;
             }
-            .item:nth-child(1) {
-                grid-column: 1 / span 3;
-                grid-row: 1 / 2;
+            .inner {
+                flex-direction: row;
+                flex-grow: 1;
             }
-            .item:nth-child(2) {
-                grid-column: 1 / 2;
-                grid-row: 2 / 3;
+            .flex_item:nth-child(1) {
+                width: 20vw;
             }
-            .item:nth-child(3) {
-                grid-column: 2 / 3;
-                grid-row: 2 / 3;
+            .flex_item:nth-child(2) {
+                width: 60vw;
             }
-            .item:nth-child(4) {
-                grid-column: 3 / 4;
-                grid-row: 2 / 3;
-            }
-            .item:nth-child(5) {
-                grid-column: 1 / 4;
-                grid-row: 3 / 4;
+            .flex_item:nth-child(3) {
+                width: 20vw;
             }
         </style>
     </head>
 
     <body>
-        <div class="flex_container">
-            <div class="item title">
-                <header>
-                    <h1><a href="index.html" class="title">군인 월급 계산기</a></h1>
-                </header>
+        <div class="flex_container main">
+            <header>
+                <h1><p><a href="index.html" class="title">군인 월급 계산기</a></p></h1>
+            </header>
+            <div class="flex_container inner">
+                <div class="flex_item">
+                    <nav>
+                        <p>nav</p>
+                    </nav>
+                </div>
+                <div class="flex_item">
+                    <main>
+                        <p>군인 월급 계산기</p>
+                    </main>
+                </div>
+                <div class="flex_item">
+                    <aside>
+                        <p>aside</p>
+                    </aside>
+                </div>
             </div>
-            <div class="item">
-                <nav>
-                    <p>nav</p>
-                </nav>
-            </div>
-            <div class="item">
-                <main>
-                    <p>군인 월급 계산기</p>
-                </main>
-            </div>
-            <div class="item">
-                <aside>
-                    <p>aside</p>
-                </aside>
-            </div>
-            <div class="item">
-                <footer><p>©Copyright 2022 by Jason Yoo. All rights reversed.</p></footer>
-            </div>
+            <footer>
+                <p>©Copyright 2022 by Jason Yoo. All rights reversed.</p>
+            </footer>
         </div>
     </body>
     
