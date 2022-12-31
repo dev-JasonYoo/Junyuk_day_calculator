@@ -9,21 +9,22 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
         <style>
             * {
                 padding: 0;
                 margin: 0;
+                box-sizing: border-box;
             }
             html, body{
                 height: 100vh;
-                width: 100vw;
+                width: 100%; /* 100vw allows the horizontal scrollbar. On the other hand, 100vw means the viewable area excluding any scrollbar*/
             }
             @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
             body {
                 font-family: 'Noto Sans KR', sans-serif;
-            }
-            header{
-                vertical-align: middle;
             }
             .title{
                 text-align: center;
@@ -42,10 +43,16 @@
             p {
                 text-align: center;
             }
-            .flex_container {
+            .flex_container_column {
                 display: flex;
                 flex-direction: column;
                 height: 100%;
+                align-content: stretch;
+            }
+            .flex_container_row {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
                 align-content: stretch;
             }
             .inner {
@@ -61,15 +68,21 @@
             .flex_item:nth-child(3) {
                 width: 20vw;
             }
+            #ipdae {
+                display: block;
+                margin: 0 auto;
+            }
         </style>
     </head>
 
     <body>
-        <div class="flex_container main">
+        <div class="flex_container_column main">
+
             <header>
                 <h1><p><a href="index.html" class="title">군인 월급 계산기</a></p></h1>
             </header>
-            <div class="flex_container inner">
+
+            <div class="flex_container_column inner">
                 <div class="flex_item">
                     <nav>
                         <p>nav</p>
@@ -78,6 +91,13 @@
                 <div class="flex_item">
                     <main>
                         <p>군인 월급 계산기</p>
+                        <input id = "ipdae" type="text" placeholder="YYYY-MM-DD"></input>
+                        <br>
+                        <div class="flex_container_row">
+                            <p id="yearMonth"></p>
+                            <p id="rank"></p>
+                            <p id="monthlyWage"></p>
+                        </div>
                     </main>
                 </div>
                 <div class="flex_item">
@@ -86,9 +106,11 @@
                     </aside>
                 </div>
             </div>
+
             <footer>
                 <p>©Copyright 2022 by Jason Yoo. All rights reversed.</p>
             </footer>
+            <script type="module" src="result.js"></script>
         </div>
     </body>
     
