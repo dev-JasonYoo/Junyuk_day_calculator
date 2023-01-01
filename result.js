@@ -63,8 +63,6 @@ function wageSumAdd(wageByMonth) {
 window.onload = function() {
     const ipdae = document.getElementById('ipdae');
     ipdae.addEventListener('change', function() {
-        console.log('yea');
-        console.log('eventlistener')
         const result = calculate(ipdae.value);
         resultAdd(result['ipdae'], result['totalMonthSpan'], result['rankByMonth'], result['wageByMonth']);
         wageSumAdd(result['wageByMonth']);
