@@ -9,6 +9,14 @@ String.prototype.format = function() {
     return formatted;
 };
 
+Number.prototype.formatKRW = function() { // only integers are supported
+    if (1000 <= this) {
+        return Math.floor(this/1000).formatKRW() + "," + (this%1000).toString();
+    } else {
+        return this.toString();
+    }
+};
+
 // Date object -> YYYY년 MM월
 function toString_YYYY_MM(date) {
     const year = date.getFullYear();
@@ -47,7 +55,7 @@ function resultAdd(ipdae, totalMonthSpan, rankByMonth, wageByMonth) {
         ); 
         yearMonth.innerHTML += toString_YYYY_MM(tempDate) + "<br>";
         rank.innerHTML += toString_rank(rankByMonth[n]) + "<br>";
-        monthlyWage.innerHTML += wageByMonth[n] + "원<br>";
+        monthlyWage.innerHTML += wageByMonth[n].formatKRW() + "원<br>";
     };
 }
 
@@ -56,7 +64,7 @@ function wageSumAdd(wageByMonth) {
         (accumulator, currentValue) => accumulator + currentValue,
         0
     );
-    monthlyWage.innerHTML += "<br>총" + wageSum + "원";
+    monthlyWage.innerHTML += "<br>총" + wageSum.formatKRW() + "원";
 }
 
 function update(ipdaeDate, branch) {
