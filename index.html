@@ -72,7 +72,11 @@
             .flex_item:nth-child(3) {
                 width: 20vw;
             }
-            #ipdae {
+            #ipdae { /* place at center */
+                display: block;
+                margin: 0 auto;
+            }
+            #calculateBtn {
                 display: block;
                 margin: 0 auto;
             }
@@ -87,14 +91,16 @@
             </header>
 
             <div class="flex_container_column inner">
+
                 <div class="flex_item">
                     <nav>
                         <p>nav</p>
                     </nav>
                 </div>
+
                 <div class="flex_item">
                     <main>
-                        <p>군인 월급 계산기</p>
+                        <br>
                         <input id = "ipdae" type="text" placeholder="YYYY-MM-DD"></input>
                         <div class="flex_container_row">
                             <div id="branchSelect" class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -107,12 +113,19 @@
                                 <label class="btn btn-secondary" for="radioAirForce">
                                     <input type="radio" class="btn-check" id="radioAirForce" name="branch" value="airForce">공군
                                 </label>
+                                <label class="btn btn-secondary" for="radioMarineCorps">
+                                    <input type="radio" class="btn-check" id="radioMarineCorps" name="branch" value="marineCorps">해병대
+                                </label>
                                 <label class="btn btn-secondary" for="radioSocialServiceAgent">
                                     <input type="radio" class="btn-check" id="radioSocialServiceAgent" name="branch" value="socialServiceAgent">공익
                                 </label>
                             </div>
                         </div>
-                        <br>
+                        
+                        <div class="flex_continer_row">
+                            <button type="button" class="btn btn-success" id="calculateBtn">계산하기</button>
+                        </div>
+
                         <div class="flex_container_row">
                             <p id="yearMonth"></p>
                             <p id="rank"></p>
@@ -120,11 +133,13 @@
                         </div>
                     </main>
                 </div>
+
                 <div class="flex_item">
                     <aside>
                         <p>aside</p>
                     </aside>
                 </div>
+
             </div>
 
             <footer>

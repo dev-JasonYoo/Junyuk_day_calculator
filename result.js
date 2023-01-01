@@ -59,12 +59,38 @@ function wageSumAdd(wageByMonth) {
     monthlyWage.innerHTML += "<br>총" + wageSum + "원";
 }
 
+function update(ipdaeDate, branch) {
+    let result = calculate(ipdaeDate, branch);
+    resultAdd(result['ipdae'], result['totalMonthSpan'], result['rankByMonth'], result['wageByMonth']);
+    wageSumAdd(result['wageByMonth']);    
+}
+
+function whichBranch() {
+    let radioButtons = document.querySelectorAll('input[type="radio"]')
+    for (const radioButton of radioButtons) {
+        if (radioButton.checked) {
+            let branch = radioButton.value;
+            if (branch === 'army') {
+                return 0 
+            } else if (branch === 'navy') {
+                return 1
+            } else if (branch === 'airForce') {
+                return 2
+            } else if (branch === 'marineCorps') {
+                return 3
+            } else {
+                return 4
+            }
+        }
+    }
+}
+
 // Edit DOM
 window.onload = function() {
-    const ipdae = document.getElementById('ipdae');
-    ipdae.addEventListener('change', function() {
-        const result = calculate(ipdae.value);
-        resultAdd(result['ipdae'], result['totalMonthSpan'], result['rankByMonth'], result['wageByMonth']);
-        wageSumAdd(result['wageByMonth']);
+    const calculateBtn = document.getElementById('calculateBtn');
+    calculateBtn.addEventListener('click', function() {
+        var branch = whichBranch();
+        console.log(branch);
+        update(ipdae.value, branch);
     });
 };

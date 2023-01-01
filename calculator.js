@@ -1,6 +1,6 @@
 import { wage, installmentSavingFund } from "./wage.js";
 
-function calculate(ipdae_input) {
+function calculate(ipdae_input, branch) {
     const ipdae = new Date(ipdae_input + 'T00:00');
     console.log('ipdae:', ipdae);
 
@@ -9,9 +9,19 @@ function calculate(ipdae_input) {
         exception1 = 1;
     };
 
+    var junyukAddition = null; // default: 육군, 해병대 18개월
+    if (branch === 0 || branch == 3) {
+        junyukAddition = 0;
+    } else if (branch === 1) { // 해군 20개월 (+2)
+        junyukAddition = 2;
+    } else { // 공군, 공익 21개월 (+3)
+        junyukAddition = 3;
+    }
+    console.log(junyukAddition);
+
     const junyuk = new Date(
         ipdae.getFullYear(),
-        ipdae.getMonth() + 18,
+        ipdae.getMonth() + 18 + junyukAddition,
         ipdae.getDate() - 1,
     );
     console.log('junyuk:', junyuk);
@@ -34,7 +44,8 @@ function calculate(ipdae_input) {
     };
     console.log(promotionDay)
 
-    const totalMonthSpan = 19 - exception1; // Span of total month is exceptionally 18 months for those who enlisted on the first day of a month (the others are 19 months)
+    const totalMonthSpan = 19 + junyukAddition - exception1; // Span of total month is exceptionally 18 months for those who enlisted on the first day of a month (the others are 19 months)
+    console.log(totalMonthSpan);
     var rankByMonth = [];
     for ( n = 0; n < totalMonthSpan; n++ ) {
         if (n < minMonthPromotion[0]) {
